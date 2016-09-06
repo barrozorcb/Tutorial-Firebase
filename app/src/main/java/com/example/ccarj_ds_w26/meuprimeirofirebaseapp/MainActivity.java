@@ -2,21 +2,28 @@ package com.example.ccarj_ds_w26.meuprimeirofirebaseapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.ui.FirebaseListAdapter;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     Firebase objetoRef;
 
-    Button botaoAzul;
-    Button botaoVermelho;
-    TextView meuTexto;
+    ListView minhaLista;
+    ArrayList<String> minhaListaDeTarefas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +32,26 @@ public class MainActivity extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
 
-        botaoAzul = (Button) findViewById(R.id.botaoAzul);
-        botaoVermelho = (Button) findViewById(R.id.botaoVermelho);
-        meuTexto = (TextView) findViewById(R.id.meuTexto);
+        minhaLista = (ListView) findViewById(R.id.listView);
 
-        objetoRef = new Firebase("https://meuprifirebaseapp.firebaseio.com/minha_cor");
+        objetoRef = new Firebase("https://meuprifirebaseapp.firebaseio.com/");
 
-        objetoRef.addValueEventListener(new ValueEventListener() {
+        Firebase refMinhaLista = objetoRef.child("Lista_Tarefas");
+
+        FirebaseListAdapter<String> adaptador = new FirebaseListAdapter<String>(this, String.class, android.R.layout.simple_list_item_1,refMinhaLista) {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String mensagem = (String) dataSnapshot.getValue();
-                meuTexto.setText(mensagem);
+            protected void populateView(View view, String s, int i) {
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setText(s);
             }
+        };
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
+        minhaLista.setAdapter(adaptador);
 
-            }
-        });
+
+
+
+
+
     }
 }

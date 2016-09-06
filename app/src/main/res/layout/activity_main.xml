@@ -9,30 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ccarj_ds_w26.meuprimeirofirebaseapp.MainActivity">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/meuTexto" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Azul"
-        android:id="@+id/botaoAzul"
-        android:layout_below="@+id/meuTexto"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="114dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vermelho"
-        android:id="@+id/botaoVermelho"
-        android:layout_alignBottom="@+id/botaoAzul"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/listView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
